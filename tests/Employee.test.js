@@ -12,5 +12,7 @@ describe('Employee', () => {
 
     expect(employee.email).toEqual('employee_test@test.com');
     expect(employee.getEmail()).toEqual('employee_test@test.com');
+
+    expect(employee.getRole()).toEqual('Employee');
   });
 });

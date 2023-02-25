@@ -15,5 +15,7 @@ describe('Intern', () => {
 
     expect(intern.school).toEqual('U of T')
     expect(intern.getSchool()).toEqual('U of T');
+
+    expect(intern.getRole()).toEqual('Intern');
   });
 });
