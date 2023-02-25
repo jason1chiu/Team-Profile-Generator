@@ -15,5 +15,7 @@ describe('Engineer', () => {
 
     expect(engineer.github).toEqual('github')
     expect(engineer.getGithub()).toEqual('github');
+
+    expect(engineer.getRole()).toEqual('Engineer');
   });
 });
