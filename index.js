@@ -1,12 +1,17 @@
+// module exports
 const Manager = require("./lib/manager");
 const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
-const inquirer = require("inquirer");
 const generateHTML = require("./src/generateHTML")
+
+// node modules
+const inquirer = require("inquirer");
 const fs = require("fs");
 
+// create empty team array
 const teamArray = []; 
 
+// ask about new employee
 const employee = [
   {
     type: 'confirm',
@@ -15,6 +20,7 @@ const employee = [
   }
 ]
 
+// ask questions common among the different employees
 const general = [
   {
     type: 'input',
@@ -71,6 +77,7 @@ const general = [
   }
 ]
 
+// final question for manager
 const manager = [
   {
     type: 'input',
@@ -87,6 +94,7 @@ const manager = [
   }
 ]
 
+// final question for engineer
 const engineer = [
   {
     type: 'input',
@@ -103,6 +111,7 @@ const engineer = [
   }
 ]
 
+// final question for intern
 const intern = [
   {
     type: 'input',
@@ -119,8 +128,10 @@ const intern = [
   }
 ]
 
+// begin our application
 init()
 
+// function to ask, confirm data and generate HTML
 function init() {
   inquirer.prompt(employee)
     .then((response) => {
