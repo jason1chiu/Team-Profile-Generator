@@ -153,5 +153,3 @@ function init() {
     }
   })
 }
-
-console.log(employees)
