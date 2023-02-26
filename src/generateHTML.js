@@ -1,13 +1,14 @@
+// card format for manager
 const managerCard = function (manager) {
   return `
   <div class="col-12 col-md-3">
     <div class="card shadow">
-      <div class="card-body bg-primary">
+      <div class="card-body bg-primary text-white">
         <h2 class="card-title">${manager.name}</h2>
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">ID: ${manager.id}</li>
-        <li class="list-group-item">Email: <a href="mailto:${manager.email}">${manager.email}</a></li>
+        <li class="list-group-item">Email: <a href="mailto:${manager.email}" >${manager.email}</a></li>
         <li class="list-group-item">Office Number: ${manager.officeNumber}</li>
       </ul>
     </div>
@@ -15,28 +16,30 @@ const managerCard = function (manager) {
   `;
 }
 
+// card format for engineer
 const engineerCard = function (engineer) {
   return `
   <div class="col-12 col-md-3">
     <div class="card shadow">
-      <div class="card-body bg-secondary">
+      <div class="card-body bg-secondary text-white">
         <h2 class="card-title">${engineer.name}</h2>
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">ID: ${engineer.id}</li>
         <li class="list-group-item">Email: <a href="mailto:${engineer.email}">${engineer.email}</a></li>
-        <li class="list-group-item">GitHub: <a href="https://github.com/${engineer.github}">${engineer.github}</li>
+        <li class="list-group-item">GitHub: <a href="https://github.com/${engineer.github}" target="_blank">${engineer.github}</a></li>
       </ul>
     </div>
   </div>
   `;
 }
 
+// card format for intern
 const internCard = function (intern) {
   return `
   <div class="col-12 col-md-3">
     <div class="card shadow">
-      <div class="card-body bg-success">
+      <div class="card-body bg-success text-white">
         <h2 class="card-title">${intern.name}</h2>
       </div>
       <ul class="list-group list-group-flush">
@@ -52,7 +55,7 @@ const internCard = function (intern) {
 // push array to page 
 generateHTML = (data) => {
 
-    // array for cards 
+    // arrays for cards 
     managerArray = []; 
     engineerArray = [];
     internArray = [];
@@ -61,20 +64,21 @@ generateHTML = (data) => {
         const employee = data[i];
         const role = employee.getRole(); 
 
+        // create array of manager cards
         if (role === 'Manager') {
             const managers = managerCard(employee);
 
             managerArray.push(managers);
         }
 
-        // call engineer function
+        // create array of engineer cards
         if (role === 'Engineer') {
             const engineers = engineerCard(employee);
 
             engineerArray.push(engineers);
         }
 
-        // call intern function 
+        // create array of intern cards
         if (role === 'Intern') {
             const interns = internCard(employee);
 
@@ -83,21 +87,20 @@ generateHTML = (data) => {
         
     }
 
-    // joining strings 
+    // join the separate positions into one array
     const managerCards = managerArray.join('');
     const engineerCards = engineerArray.join('');
     const internCards = internArray.join('')
 
-    // return to generated page
+    // generate HTML from the three arrays
     const generateTeam = generateTeamPage(managerCards, engineerCards, internCards); 
     return generateTeam;
 }
 
-// generate html page 
+// function to generate HTML
 const generateTeamPage = function (managerCards, engineerCards, internCards) {   
 
-  return`
-  <!DOCTYPE html>
+  return`<!DOCTYPE html>
   <html lang="en">
   
   <head>
@@ -105,11 +108,10 @@ const generateTeamPage = function (managerCards, engineerCards, internCards) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Team Profile</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
   </head>
   
   <body>
-    <header class="jumbotron text-center bg-info p-3">
+    <header class="jumbotron text-center bg-info p-3 text-white">
       <h1>Team Profile</h1>
     </header>
 
