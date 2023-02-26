@@ -2,8 +2,10 @@ const Manager = require("./lib/manager");
 const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
 const inquirer = require("inquirer");
+const generateHTML = require("./src/generateHTML")
+const fs = require("fs");
 
-employees = [];
+const teamArray = []; 
 
 const employee = [
   {
@@ -117,7 +119,7 @@ const intern = [
   }
 ]
 
-init();
+init()
 
 function init() {
   inquirer.prompt(employee)
@@ -129,27 +131,30 @@ function init() {
             inquirer.prompt(engineer)
             .then((engineerAnswers) => {
               const engineer = new Engineer(answers.name, answers.id, answers.email, engineerAnswers.github);
-              employees.push(engineer);
+              teamArray.push(engineer);
               init();
             });
           } else if (answers.role === 'Manager') {
             inquirer.prompt(manager)
             .then((managerAnswers) => {
               const manager = new Manager(answers.name, answers.id, answers.email, managerAnswers.officeNumber);
-              employees.push(manager);
+              teamArray.push(manager);
               init();
             }) 
           } else {
             inquirer.prompt(intern)
             .then((internAnswers) => {
             const intern = new Intern(answers.name, answers.id, answers.email, internAnswers.school);
-            employees.push(intern);
+            teamArray.push(intern);
             init();
           })
         }
       })
     } else {
-      console.log('All employees added!');
+      const data = generateHTML(teamArray);
+      fs.writeFile('./dist/index.html', data, err => {
+        (err) ? console.error(err) : console.log('Success!')
+      });
     }
   })
 }
